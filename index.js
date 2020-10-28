@@ -5,8 +5,8 @@ const app = express();
 let coordArray = [];
 let sizeOfDb;
 const fetch = require("node-fetch");
-const port = process.env.PORT||4000;
-app.listen(port, () => console.log('listenin at 4000'));
+
+app.listen(process.env.PORT||4000, () => console.log('listenin at 4000'));
 app.use(express.static('public'));
 app.use(express.json({ limit: '1mb' }));
 
