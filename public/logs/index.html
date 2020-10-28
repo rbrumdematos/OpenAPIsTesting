@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+    body {
+        margin: 0;
+        background-color: white;
+        text-align: center;
+    }
+
+    img {
+        width: auto;
+        height: auto;
+        margin-top: 50px;
+
+    }
+th{
+    background-color: green;
+    color:white;
+}
+
+#geo {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#geo td, #geo th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#geo tr:nth-child(even){background-color: #f2f2f2;}
+
+#geo tr:hover {background-color: #ddd;}
+
+#geo th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+</style>
+
+<body>
+    <div>
+        <h1>This is the Data Selfie App</h1>
+
+        <table id="geo">
+            <tr>
+                <th>Timestamp</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Weather</th>
+                <th>Humidity</th>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+<script>
+    getData();
+    async function getData() {
+
+        let newTr = [];
+        let newTd = [];
+        let newImg = [];
+        let i = 0;
+        let j = 0;
+        //const img = document.createElement('img');
+        const table = document.querySelector('table');
+        const response = await fetch('../api');
+        const data = await response.json();
+
+
+        for (i = 0; i < data.length; i++) {
+            //console.log(data[i].userInput);
+            newTr[i] = document.createElement('tr');
+            table.appendChild(newTr[i]);
+
+            for (j = 0; j < 5; j++) {
+                newTd[j] = document.createElement('td');
+
+                newTr[i].appendChild(newTd[j]);
+
+                if (j == 0) {
+                    //console.log(newTr[i]);
+                    newTd[j].textContent = data[i].timestamp;
+                }
+                if (j == 1) {
+                    newTd[j].textContent = data[i].latitude;
+                }
+                if (j == 2) {
+                    newTd[j].textContent = data[i].longitude;
+                }
+                if (j == 3) {
+                    newTd[j].textContent = data[i].temp;
+                }
+                if (j == 4) {
+                    newTd[j].textContent = data[i].humidity;
+                }
+
+            }
+
+
+            //newP[i] = document.createElement('p');
+            //console.log(newP[i]);
+            //h1.insertAdjacentElement('afterend', newP[i]);
+            //newP[i].textContent = "Latitude " + data[i].latitude + "Longitude " + data[i].longitude + "Timestamp " + data[i].timestamp + "userInput is:" + data[i].userInput;
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    background-color: white;
+    text-align: center;
+}
+
+img {
+    width: auto;
+    height: auto;
+    margin-top: 50px;
+}
